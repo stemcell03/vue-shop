@@ -1,6 +1,17 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import './plugins/element.js'
+// 导入全局样式表
+import './assets/css/global.css'
+//导入字体样式表
+import './assets/fonts/iconfont.css'
+//引入axios
+import axios from 'axios'
+//将axios写入Vue原型中
+Vue.prototype.$http = axios
+//a设置xios默认的发送基址
+axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
 
 Vue.config.productionTip = false
 
