@@ -8,6 +8,14 @@ import './assets/css/global.css'
 import './assets/fonts/iconfont.css'
 //引入axios
 import axios from 'axios'
+
+
+//挂载拦截器
+axios.interceptors.request.use(config => {
+  //console.log(config)
+  config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
 //将axios写入Vue原型中
 Vue.prototype.$http = axios
 //a设置xios默认的发送基址

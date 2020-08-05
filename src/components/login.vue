@@ -69,6 +69,7 @@ export default {
   methods: {
     reset() {
       this.$refs.loginFormRef.resetFields();
+      console.log(this)
     },
     login() {
       this.$refs.loginFormRef.validate(async (valid) => {
@@ -77,7 +78,7 @@ export default {
         const { data: res } = await this.$http.post("login", this.loginForm); //参数为请求地址，发送数据
         if (res.meta.status !== 200) return this.$message.error("登录失败");
         this.$message.success("登录成功");
-        //console.log(res);
+        //console.log(this);
         window.sessionStorage.setItem("token", res.data.token);
         this.$router.push("/home");
       });
