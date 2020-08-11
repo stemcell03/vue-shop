@@ -23,7 +23,11 @@ import {
   Tooltip,
   Pagination,
   Dialog,
-  MessageBox
+  MessageBox,
+  Tag,
+  Tree,
+  Select,
+  Option,
 
 } from 'element-ui'
 
@@ -51,8 +55,10 @@ Vue.use(Button)
   .use(Tooltip)
   .use(Pagination)
   .use(Dialog)
-
-
+  .use(Tag)
+  .use(Tree)
+  .use(Select)
+  .use(Option)
 //$为自定义属性名，也是Vue 自己暴露的一些属性
 Vue.prototype.$message = Message
 

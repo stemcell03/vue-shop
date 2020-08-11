@@ -23,6 +23,7 @@
           :collapse-transition="false"
           :router="true "
           :default-active="activePath"
+          :default-openeds="openArr"
         >
           <!-- 这是一级菜单 -->
           <el-submenu :index="'/'+item.path" v-for="item in menulist" :key="item.id">
@@ -71,12 +72,14 @@ export default {
         '145':'iconfont icon-dollar',
       },
       isCollapse:false,
-      activePath:''
+      activePath:'',
+      openArr:[]
     }
   },
   created(){
     this.getMenuList()
     this.activePath = window.sessionStorage.getItem('activePath')
+    //console.log(this.openArr)
   },
   watch:{
 
@@ -99,19 +102,21 @@ export default {
     },
 
     savePath(activePath){
-      console.log("调用了save")
+      //console.log("调用了save")
       window.sessionStorage.setItem('activePath', activePath)
       this.activePath = activePath
     },
   },
   beforeRouteUpdate (to, from, next) {
-    // ...
-    console.log( "from:"+from.path,"--to:"+to.path)
+    // 解决导航栏激活问题
+    //console.log( "from:"+from.path,"--to:"+to.path)
     const acPath = window.sessionStorage.getItem('activePath')
-    if (to.path !== acPath && acPath !== 'false' ) {
-      console.log("acPath:"+acPath)
-      console.log("activePath:"+this.activePath)
+    if (to.path === "/welcome") {
+      //console.log("acPath:"+acPath)
+      //console.log("activePath:"+this.activePath)
       this.savePath("false")
+      this.openArr = []
+      //console.log(this.openArr)
     }
     next()
   }
