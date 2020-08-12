@@ -245,6 +245,7 @@ export default {
       //console.log(newsize)
       this.queryInfo.pagesize = newsize
       this.getUserList()
+
     },
     //页数
     handleCurrentChange(newpage){

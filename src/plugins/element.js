@@ -28,6 +28,7 @@ import {
   Tree,
   Select,
   Option,
+  Cascader,
 
 } from 'element-ui'
 
@@ -59,6 +60,7 @@ Vue.use(Button)
   .use(Tree)
   .use(Select)
   .use(Option)
+  .use(Cascader)
 //$为自定义属性名，也是Vue 自己暴露的一些属性
 Vue.prototype.$message = Message
 
