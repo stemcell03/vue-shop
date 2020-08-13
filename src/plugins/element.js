@@ -29,6 +29,9 @@ import {
   Select,
   Option,
   Cascader,
+  Alert,
+  Tabs,
+  TabPane
 
 } from 'element-ui'
 
@@ -61,6 +64,9 @@ Vue.use(Button)
   .use(Select)
   .use(Option)
   .use(Cascader)
+  .use(Alert)
+  .use(Tabs)
+  .use(TabPane)
 //$为自定义属性名，也是Vue 自己暴露的一些属性
 Vue.prototype.$message = Message
 
