@@ -308,7 +308,7 @@ export default {
           email:this.editForm.email,
           mobile:this.editForm.mobile
         })
-        console.log(res.meta.status)
+        //console.log(res.meta.status)
         if(res.meta.status !== 200){
           return this.$message.error('更新用信息失败')
         }

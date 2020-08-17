@@ -31,7 +31,12 @@ import {
   Cascader,
   Alert,
   Tabs,
-  TabPane
+  TabPane,
+  Steps,
+  Step,
+  Checkbox,
+  CheckboxGroup,
+  Upload
 
 } from 'element-ui'
 
@@ -67,6 +72,11 @@ Vue.use(Button)
   .use(Alert)
   .use(Tabs)
   .use(TabPane)
+  .use(Step)
+  .use(Steps)
+  .use(Checkbox)
+  .use(CheckboxGroup)
+  .use(Upload)
 //$为自定义属性名，也是Vue 自己暴露的一些属性
 Vue.prototype.$message = Message
 

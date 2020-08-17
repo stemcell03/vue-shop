@@ -203,7 +203,7 @@ export default {
       this.getCateList()
     },
   methods:{
-    //获取用户列表
+    //获取分类列表
     async getCateList(){
 
 
@@ -213,7 +213,7 @@ export default {
       if(res.meta.status !== 200) return this.$message.error('获取商品列表失败')
       this.cateList = res.data.result
       this.total = res.data.total
-
+      console.log(res.data)
       // console.log(this.queryInfo.pagenum)
       // console.log(this.total)
       // console.log(this.queryInfo.pagesize)
