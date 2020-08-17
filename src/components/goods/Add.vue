@@ -281,7 +281,7 @@ export default {
 .previewImg{
   width:100%;
 }
-。btnAdd{
+.btnAdd{
   margin-top:15px;
 }
 </style>

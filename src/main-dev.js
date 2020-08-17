@@ -13,17 +13,29 @@ import TreeTabel from 'vue-table-with-tree-grid'
 // 富文本编辑器
 import VueQuillEditor from 'vue-quill-editor'
 
+// 导入nprogress 
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
 
 import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css' // for bubble theme
 
-Vue.use(VueQuillEditor, /* { default global options } */)
+Vue.use(VueQuillEditor, /* { default global options } */ )
 
+// 在request拦截器展示进度条
 //挂载拦截器
 axios.interceptors.request.use(config => {
   //console.log(config)
+  NProgress.start()
   config.headers.Authorization = window.sessionStorage.getItem('token')
+  return config
+})
+
+// 在response 拦截器去掉进度条
+axios.interceptors.response.use(config => {
+  NProgress.done()
   return config
 })
 //将axios写入Vue原型中

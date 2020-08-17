@@ -36,7 +36,9 @@ import {
   Step,
   Checkbox,
   CheckboxGroup,
-  Upload
+  Upload,
+  Timeline,
+  TimelineItem
 
 } from 'element-ui'
 
@@ -77,6 +79,8 @@ Vue.use(Button)
   .use(Checkbox)
   .use(CheckboxGroup)
   .use(Upload)
+  .use(Timeline)
+  .use(TimelineItem)
 //$为自定义属性名，也是Vue 自己暴露的一些属性
 Vue.prototype.$message = Message
 
