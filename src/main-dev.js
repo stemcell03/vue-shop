@@ -29,6 +29,7 @@ Vue.use(VueQuillEditor, /* { default global options } */ )
 axios.interceptors.request.use(config => {
   //console.log(config)
   NProgress.start()
+  // 拦截器拦截请求，把token添加到请求头中
   config.headers.Authorization = window.sessionStorage.getItem('token')
   return config
 })

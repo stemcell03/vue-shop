@@ -107,10 +107,12 @@ export default {
       this.activePath = activePath
     },
   },
+  // 在当前路由改变，但是该组件被复用时调用
   beforeRouteUpdate (to, from, next) {
     // 解决导航栏激活问题
     //console.log( "from:"+from.path,"--to:"+to.path)
     const acPath = window.sessionStorage.getItem('activePath')
+    // 判断是否返回首页，是的话将
     if (to.path === "/welcome") {
       //console.log("acPath:"+acPath)
       //console.log("activePath:"+this.activePath)
