@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import './plugins/element.js'
+// import './plugins/element.js'
 // 导入全局样式表
 import './assets/css/global.css'
 //导入字体样式表
@@ -12,15 +12,8 @@ import axios from 'axios'
 import TreeTabel from 'vue-table-with-tree-grid'
 // 富文本编辑器
 import VueQuillEditor from 'vue-quill-editor'
-
 // 导入nprogress 
 import NProgress from 'nprogress'
-import 'nprogress/nprogress.css'
-
-
-import 'quill/dist/quill.core.css' // import styles
-import 'quill/dist/quill.snow.css' // for snow theme
-import 'quill/dist/quill.bubble.css' // for bubble theme
 
 Vue.use(VueQuillEditor, /* { default global options } */ )
 
