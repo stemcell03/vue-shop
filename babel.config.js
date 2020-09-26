@@ -1,6 +1,6 @@
 const prodPlugins = []
 if (process.env.NODE_ENV === 'production') {
-  prodPlugins.push('babel-plugin-transform-undefined-to-void')
+  prodPlugins.push('transform-remove-console')
 }
 
 module.exports = {
@@ -13,9 +13,9 @@ module.exports = {
       {
         "libraryName": "element-ui",
         "styleLibraryName": "theme-chalk"
-      },
-      ...prodPlugins,
-      '@babel/plugin-syntax-dynamic-import'
-    ]
+      }
+    ],
+    ...prodPlugins,
+    '@babel/plugin-syntax-dynamic-import'
   ]
 }

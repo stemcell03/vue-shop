@@ -41,7 +41,7 @@ axios.interceptors.response.use(config => {
 //将axios写入Vue原型中
 Vue.prototype.$http = axios
 //a设置xios默认的发送基址
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+axios.defaults.baseURL = 'https://www.liulongbin.top:8888/api/private/v1/'
 
 Vue.config.productionTip = false
 
