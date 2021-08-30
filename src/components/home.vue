@@ -53,9 +53,7 @@
       :style="{width:isCollapse ? 'calc( 100vw - 64px)':'calc( 100vw - 250px)'}"
     >
       <!-- 头部区域 -->
-      <el-header
-        :style="{width:isCollapse ? 'calc( 100vw - 69px)':'calc( 100vw - 255px)'}"
-      >
+      <el-header>
         <div class="header">
           <div>
           </div>
@@ -68,15 +66,15 @@
         </div>
       </el-header>
       <!-- 主要内容 -->
-      <el-container class="main">
-        <el-main >
+      <!-- <el-container> -->
+        <el-main  class="main">
           <div class="scroll">
             <keep-alive>
               <router-view></router-view>
             </keep-alive>
           </div>
         </el-main>
-      </el-container>
+      <!-- </el-container> -->
     </el-container>
   </el-container>
 </template>
@@ -190,21 +188,19 @@ export default {
       }
       span{
         margin-left: 20px;
-
       }
-    }
-    .el-menu{
-      width: 100%;
     }
   }
   .right{
     overflow: scroll;
     position: relative;
+    padding: 0;
     .el-header{
+      width: calc( 100% - 5px);
       padding: 0;
-      position: fixed;
+      position: sticky;
       z-index: 9998;
-      right: 5px;
+      right: 10px;
       top: 0;
       .header{
         display: flex;
@@ -225,12 +221,12 @@ export default {
     .el-main{
       background-color: #eaedf1;
       width:100%;
-      padding-top: 120px;
+      padding-top: 60px;
     }
   }
 
   .home-container{
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
   }
@@ -239,7 +235,6 @@ export default {
   }
   
   .toggle-button{
-    background-color: #4a5064;
     font-size: 30px;
     line-height: 24px;
     color: #fff;
