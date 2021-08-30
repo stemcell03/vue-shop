@@ -8,6 +8,7 @@
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
 
     <title><%= htmlWebpackPlugin.options.isProd ? '':'dev - ' %>电商后台管理系统</title>
+    <% if (htmlWebpackPlugin.options.isProd){ %>
     <!-- 进度条样式文件 -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css" />
     <!-- 富文本编辑器的样式文件 -->
@@ -28,6 +29,7 @@
     <!-- element-ui -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/element-ui/2.8.2/theme-chalk/index.css">
     <script src="https://cdn.staticfile.org/element-ui/2.8.2/index.js "></script>
+    <% } %>
   </head>
 
   <body>

@@ -1,5 +1,8 @@
 import Vue from 'vue'
+import store from '@/store'
 import VueRouter from 'vue-router'
+
+export const HOME_PAGE = '/welcome'
 
 //import login from '../components/login.vue'
 const login = () => import( /*webpackChunkName: "login-home-welcome" */ '../components/login.vue')
@@ -42,6 +45,11 @@ const Report = () => import('../components/report/Report.vue')
 
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 const routes = [{
     path: '/',
     redirect: '/login'
@@ -56,43 +64,74 @@ const routes = [{
     redirect: '/welcome',
     children: [{
         path: '/welcome',
-        component: welcome
+        component: welcome,
+        meta: {
+          title: '首页'
+        }
       },
       {
         path: '/users',
-        component: users
+        component: users,
+        meta: {
+          title: '用户列表'
+        }
       },
       {
         path: '/rights',
         component: Rights,
+        meta: {
+          title: '权限列表'
+        }
       },
       {
         path: '/roles',
-        component: Roles
+        component: Roles,
+        meta: {
+          title: '角色列表'
+        }
       },
       {
         path: '/categories',
-        component: Cate
+        component: Cate,
+        meta: {
+          title: '商品分类'
+        }
       },
       {
         path: '/params',
-        component: Params
+        component: Params,
+        meta: {
+          title: '分类参数'
+        }
       },
       {
         path: '/goods',
-        component: Goodslist
+        component: Goodslist,
+        meta: {
+          title: '商品列表'
+        }
       },
       {
         path: '/goods/add',
-        component: Add
+        component: Add,
+        meta: {
+          title: '',
+          path:'/goods'
+        }
       },
       {
         path: '/orders',
-        component: Order
+        component: Order,
+        meta: {
+          title: '订单列表'
+        }
       },
       {
         path: '/reports',
-        component: Report
+        component: Report,
+        meta: {
+          title: '数据报表'
+        }
       },
     ]
   },
@@ -109,6 +148,8 @@ router.beforeEach((to, from, next) => {
   //获取token
   const tokenStr = window.sessionStorage.getItem('token')
   if (!tokenStr) return next('/login')
+  let { meta, path } = to
+  store.commit('tabs/tabRouter', {meta, path})
   next()
 })
 

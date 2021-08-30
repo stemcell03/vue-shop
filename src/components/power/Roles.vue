@@ -203,6 +203,7 @@ export default {
         return this.$message.error('获取用户权限列表失败')
       // this.$message.success('获取用户权限列表成功')
       this.roleList = res.data
+      console.log(this.roleList,'this.roleList');
       //console.log(this.roleList)
     },
     // 展示修改角色对话框

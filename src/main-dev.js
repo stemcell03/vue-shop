@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
+import store from './store'
 import router from './router'
+import "@/assets/styles/reset.scss"            // 重置HTML样式、
+
+import vuescroll from 'vuescroll';
 import './plugins/element.js'
 // 导入全局样式表
 import './assets/css/global.css'
@@ -17,13 +21,18 @@ import VueQuillEditor from 'vue-quill-editor'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
+import components from '@/components'
+
 
 import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css' // for bubble theme
 
-Vue.use(VueQuillEditor, /* { default global options } */ )
+Vue.use(VueQuillEditor, /* { default global options } */)
 
+Vue.use(components)
+
+Vue.use(vuescroll);
 // 在request拦截器展示进度条
 //挂载拦截器
 axios.interceptors.request.use(config => {
@@ -66,5 +75,6 @@ Vue.filter('dateFormat', function (originVal) {
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
