@@ -10,7 +10,7 @@
           @click="$router.push(tab.path)"  
         >
           {{tab.meta.title}}
-          <i class="el-icon-close" @click.stop="close(tab.path)"></i>
+          <i class="el-icon-close" @click.stop="close(tab.path)" v-show="tab.meta.title !== '首页'"></i>
         </li>
       </ul>
     </vue-scroll>

@@ -40,31 +40,32 @@ export default {
       }
     },
     delTab (state, o) {
-      console.log(o);
       let index = state.tabs.opened.findIndex(e => {
         return e.path === o.path
       });
       state.tabs.opened.splice(index, 1)
       if (o.path === state.tabs.current.path) {
-        (state.tabs.current = state.tabs.opened[index - 1] || state.tabs.opened[index + 1]) || o.router.push(state.home)
+        state.tabs.current = state.tabs.opened[index - 1] || state.tabs.opened[index + 1]
+        o.router.push(state.tabs.current)
       }
     },
     closeTabs(state, o) {
-      const index = state.tabs.opened.findIndex(e => {
+      let index = state.tabs.opened.findIndex(e => {
         return state.tabs.current.meta.title == e.meta.title
       })
       switch (o.position) {
         case 'left':
-          state.tabs.opened.splice(0, index);
+          state.tabs.opened.splice(1, index - 1);
           break;
         case 'right':
           state.tabs.opened.splice(index + 1);
           break;
         case 'other':
-          state.tabs.opened = [state.tabs.current];
+          state.tabs.opened.splice(1, index - 1);
+          state.tabs.opened.splice(2);
           break;
         case 'all':
-          state.tabs.opened = [];
+          state.tabs.opened.splice(1);
           o.router.push(state.home)
           break;
         default:
