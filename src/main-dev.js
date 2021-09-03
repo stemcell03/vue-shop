@@ -4,8 +4,9 @@ import store from './store'
 import router from './router'
 import "@/assets/styles/reset.scss"            // 重置HTML样式、
 
+import echarts from 'echarts'
 import vuescroll from 'vuescroll';
-import './plugins/element.js'
+// import './plugins/element.js'
 // 导入全局样式表
 import './assets/css/global.css'
 //导入字体样式表
@@ -22,14 +23,21 @@ import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 import components from '@/components'
-
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css';
 
 import 'quill/dist/quill.core.css' // import styles
 import 'quill/dist/quill.snow.css' // for snow theme
 import 'quill/dist/quill.bubble.css' // for bubble theme
 
 Vue.use(VueQuillEditor, /* { default global options } */)
+Vue.use(ElementUI)
 
+Vue.prototype.$echarts = echarts
+
+Vue.prototype.$message = ElementUI.Message
+
+Vue.prototype.$confirm = ElementUI.MessageBox.confirm
 Vue.use(components)
 
 Vue.use(vuescroll);
@@ -45,6 +53,11 @@ axios.interceptors.request.use(config => {
 
 // 在response 拦截器去掉进度条
 axios.interceptors.response.use(config => {
+  console.log(config);
+  if (config.data.meta.msg === '无效token') {
+    router.push('/login')
+  }
+
   NProgress.done()
   return config
 })

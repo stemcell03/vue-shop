@@ -27,7 +27,7 @@
           <!-- 一级菜单的模板区域 -->
           <template slot="title">
             <!-- 图标 -->
-            <i :class="iconsObj[item.id]"></i>
+            <i :class="iconsObj[item.id] || 'iconfont icon-editor'"></i>
             <!-- 文本 -->
             <span>{{ item.authName }}</span>
           </template>
@@ -135,31 +135,43 @@ export default {
     },
     //获取所有菜单
     async getMenuList() {
+      const extra = [
+        {
+          authName: "组件管理",
+          children: [{  
+              authName: "组件展示",
+              children: [],
+              id: (Math.random() * 100).floor,
+              order: 1,
+              path: "components"},
+              {  
+              authName: "组件展示",
+              children: [],
+              id: (Math.random() * 100).floor,
+              order: 1,
+              path: "components1"},
+              {  
+              authName: "组件展示",
+              children: [],
+              id: (Math.random() * 100).floor,
+              order: 1,
+              path: "components2"},
+              
+          ],
+          id: (Math.random() * 100).floor,
+          order: 1,
+          path: "components"
+        }
+      ]
       const { data:res } = await this.$http.get('menus')
       if( res.meta.status !== 200 ) return this.$message.error( res.meta.msg )
-      this.menulist = res.data
+      this.menulist = res.data.concat(extra)
     },
     //菜单栏的折叠与展开
     toggleCollapse() {
       this.isCollapse=!this.isCollapse
     },
-    // savePath(activePath){
-    //   window.sessionStorage.setItem('activePath', activePath)
-    //   this.activePath = window.sessionStorage.getItem('activePath')
-    // },
   },
-  // // 在当前路由改变，但是该组件被复用时调用
-  // beforeRouteUpdate (to, from, next) {
-  //   // 解决导航栏激活问题
-  //   const acPath = window.sessionStorage.getItem('activePath')
-  //   // 判断是否返回首页，是的话将
-  //   if (to.path === "/welcome") {
-  //     this.savePath("false")
-  //     this.openArr = []
-  //   }
-  //   next()
-  // }
-
 }
 </script>
 <style lang="less" scoped>
@@ -173,6 +185,9 @@ export default {
         height: 0 !important;
     }
     background-color: #191a23;
+    .el-menu{
+      border: none;
+    }
     .icon{
       height: 60px;
       display: flex;
@@ -219,7 +234,9 @@ export default {
     .el-main{
       background-color: #eaedf1;
       width:100%;
+      padding: 0;
       padding-top: 60px;
+      position: relative;
     }
   }
 

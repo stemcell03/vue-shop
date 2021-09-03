@@ -40,6 +40,9 @@ const Order = () => import('../pages/order/Order.vue')
 const Report = () => import('../pages/report/Report.vue')
 
 
+const components = () => import('../pages/components/index.vue')
+
+
 
 
 
@@ -74,6 +77,27 @@ const routes = [{
         component: users,
         meta: {
           title: '用户列表'
+        }
+      },
+      {
+        path: '/components',
+        component: components,
+        meta: {
+          title: '组件'
+        }
+      },
+      {
+        path: '/components1',
+        component: components,
+        meta: {
+          title: '组件1'
+        }
+      },
+      {
+        path: '/components2',
+        component: components,
+        meta: {
+          title: '组件2'
         }
       },
       {

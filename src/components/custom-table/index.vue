@@ -39,6 +39,14 @@ export default {
       }
     }
   },
+  watch:{
+    options:{
+      immediate:true,
+      handler(v){
+        console.log(v,'options');
+      }
+    }
+  },
   data() {
     return {
 
