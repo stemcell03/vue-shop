@@ -3,7 +3,7 @@ import App from './App.vue'
 import store from './store'
 import router from './router'
 import "@/assets/styles/reset.scss"            // 重置HTML样式、
-
+import echarts from 'echarts'
 import vuescroll from 'vuescroll';
 // import './plugins/element.js'
 // 导入全局样式表

@@ -1,19 +1,50 @@
 <template>
   <div class="panel">
-    <h2>xwas</h2>
-    <div class="chart"></div>
+    <h2>
+      {{option.title}}
+      <slot name="titleLink"></slot>
+    </h2>
+    <div 
+      :id="ids"
+      class="chart">
+      <slot></slot>
+    </div>
     <div class="panel-footer"></div>
   </div>
 </template>
 <script>
 export default {
   name:'Panel',
+  props:['ids','option'],
   data() {
     return {
-
     }
   },
-  methods: {},
+  mounted(){
+    this.initEcharts()
+  },
+  methods: {
+    initEcharts(){
+      const _this = this
+      const myChart = this.$echarts.init(document.getElementById(this.ids))
+      myChart.setOption(this.option.option)
+      window.addEventListener("resize", function () {
+        myChart.resize()
+      })
+      window.addEventListener("custom-resize", function (event) {
+        const a = setTimeout(function(){
+          myChart.resize()
+          clearTimeout(a)
+        },100)
+      })
+      const b = window.addEventListener("custom-chartReset", function (event) {
+        setTimeout(function(){
+          myChart.setOption(_this.option.option)
+          clearTimeout(b)
+        },100)
+      })
+    }
+  },
 }
 </script>
 <style lang='scss' scoped>
@@ -80,7 +111,7 @@ export default {
   }
   .chart {
     height: 240px;
-    background-color: pink;
+    position: relative;
   }
 }
 </style>

@@ -29,10 +29,12 @@
         </el-table-column>
       </el-table>
     </custom-table>
+    <div id="test" style="width: 600px;height:400px;"></div>
   </div>
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   data () {
     return {
@@ -83,11 +85,54 @@ export default {
             label:"地址"
           }
         ]
+      },
+      chartOptions: {
+        title: {
+          text: '用户来源'
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: '#E9EEF3'
+            }
+          }
+        },
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: [
+          {
+            boundaryGap: false
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ]
       }
     }
   }, 
-  mounted(){
+  async mounted(){
     this.getList()
+        // 3.基于准备好的dom，初始化echarts实例
+    var myChart = this.$echarts.init(document.getElementById('test'));
+
+    const {data:res} = await this.$http.get('reports/type/1')
+
+    if( res.meta.status !== 200 ){
+      return this.$message.error('获取数据失败')
+    }
+
+    // 4. 指定图表的配置项和数据
+    const result = _.merge(res.data, this.chartOptions)
+    // 5. 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(result)
   },
   methods: {
     getList(page){

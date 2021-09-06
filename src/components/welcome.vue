@@ -6,20 +6,34 @@
     </header>
     <section class="main">
       <div class="column">
-        <panel v-for="i in 3" :key="i"/>
+        <panel v-for="(e1,i1) in chartOptions.left" :key="e1.title" :ids="e1.title" :option="e1">
+          <template #titleLink  v-if="e1.titleLink">
+            <span @click="handleChangeYear('left',i1,$event)">
+              <a 
+                href="javascript:;"
+                v-for="(e2,i2) in yearData"
+                :key="e2.year"
+                :data-index="i2"
+                class="title-a"
+                >
+                {{e2.year}}
+              </a>
+            </span>
+          </template>
+        </panel>
       </div>
       <div class="column">
         <div class="no">
           <div class="no-hd">
             <ul>
-              <li>11111</li>
-              <li>22222</li>
+              <li>12121</li>
+              <li>21212</li>
             </ul>
           </div>
           <div class="no-bd">
             <ul>
               <li>人数</li>
-              <li>宗苏</li>
+              <li>需求</li>
             </ul>
           </div>
         </div>
@@ -31,9 +45,21 @@
         </div>
       </div>
       <div class="column">
-        <div class="column">
-          <panel v-for="i in 3" :key="i"/>
-        </div>
+        <panel v-for="(e1,i1) in chartOptions.right" :key="e1.title" :ids="e1.title" :option="e1">
+          <template #titleLink  v-if="e1.titleLink">
+            <span @click="handleChangeYear('left',i1,$event)">
+              <a 
+                href="javascript:;"
+                v-for="(e2,i2) in yearData"
+                :key="e2.year"
+                :data-index="i2"
+                class="title-a"
+                >
+                {{e2.year}}
+              </a>
+            </span>
+          </template>
+        </panel>
       </div>
     </section>
   </div>
@@ -41,38 +67,64 @@
 
 <script>
 import Panel from '@/components/dataView/panel.vue'
+import '../../node_modules/echarts/map/js/china'
+import mapOption from '@/components/map'
+import chartOptions from './chartOptions'
+import { yearData } from './chartOptions'
 export default {
   components:{
-    Panel
+    Panel,
+    // MyECharts
   },
   data () {
     return {
       currentTime:'',
-      t:null
+      t:null,
+      chartOptions,
+      yearData,
+      mapOption
     }
   }, 
   computed:{
-
   },
   mounted(){
+    this.mapCharts()
     this.getTime()
   },
   methods: {
     getTime(){
-        this.t = setTimeout(time, 1000); //開始运行
-        const _this = this
-        function time() {
-          clearTimeout(this.t); //清除定时器
-          const dt = new Date();
-          var y = dt.getFullYear();
-          var mt = dt.getMonth() + 1;
-          var day = dt.getDate();
-          var h = dt.getHours(); //获取时
-          var m = dt.getMinutes(); //获取分
-          var s = dt.getSeconds(); //获取秒
-          _this.currentTime =  "当前时间：" + y + "年" + mt + "月" + day + "日" + "-" + h + "时" + m + "分" + s + "秒";
-          _this.t = setTimeout(time, 1000); //设定定时器，循环运行
-        }
+      this.t = setTimeout(time, 1000); //開始运行
+      const _this = this
+      function time() {
+        clearTimeout(this.t); //清除定时器
+        const dt = new Date();
+        var y = dt.getFullYear();
+        var mt = dt.getMonth() + 1;
+        var day = dt.getDate();
+        var h = dt.getHours(); //获取时
+        var m = dt.getMinutes(); //获取分
+        var s = dt.getSeconds(); //获取秒
+        _this.currentTime =  "当前时间：" + y + "年" + mt + "月" + day + "日" + "-" + h + "时" + m + "分" + s + "秒";
+        _this.t = setTimeout(time, 1000); //设定定时器，循环运行
+      }
+    },
+    handleChangeYear(position,i1,i2){
+      this.chartOptions[position][i1].option.series.map((e,i) => {
+        return e.data = this.yearData[i2.target.dataset.index].data[i]
+      })
+      window.dispatchEvent(window.myEvent['custom-chartReset'])
+    },
+    mapCharts(){
+      const myChart = this.$echarts.init(document.querySelector('.map .chart'))
+      myChart.setOption(this.mapOption)
+      window.addEventListener("resize", function () {
+        myChart.resize()
+      })
+      window.addEventListener("custom-resize", function (event) {
+        setTimeout(function(){
+          myChart.resize()
+        },100)
+      })
     }
   }
 }
@@ -124,6 +176,7 @@ export default {
       &:nth-child(2) {
         flex: 5;
         margin: 0 10px 15px;
+        overflow-y: hidden;
         .no{
           padding:15px;
           background-color:rgba(101, 132, 226, 0.1);
@@ -194,8 +247,8 @@ export default {
           height: 810px;
           position: relative;
           .map-bg1{
-            height: 518px;
-            width: 518px;
+            height: 418px;
+            width: 418px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -206,8 +259,8 @@ export default {
             z-index: 1;
           }
           .map-bg2{
-            height: 643px;
-            width: 643px;
+            height: 543px;
+            width: 543px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -219,8 +272,8 @@ export default {
             animation: rotate 15s linear infinite;
           }
           .map-bg3{
-            height: 566px;
-            width: 566px;
+            height: 466px;
+            width: 466px;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -244,8 +297,14 @@ export default {
             position: absolute;
             top: 0;
             left: 0;
+            z-index: 3;
           }
         }
+      }
+      .title-a{
+        color: #fff;
+        text-decoration: none;
+        margin: 0 10px;
       }
     } 
   } 

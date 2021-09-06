@@ -7,8 +7,7 @@
         <span v-show="!isCollapse">后台管理系统</span>
       </div>
       <div class="toggle-button" @click="toggleCollapse">
-        <i class="el-icon-arrow-right" v-if="!isCollapse"></i>
-        <i class="el-icon-arrow-left" v-else></i>
+        <i :class="{'el-icon-arrow-right':!isCollapse,'el-icon-arrow-left':isCollapse}"></i>
       </div>
       <!-- 侧边栏菜单区域 -->
       <el-menu
@@ -100,7 +99,6 @@ export default {
   },
   created(){
     this.getMenuList()
-    //console.log(this.openArr)
   },
   computed:{
     ...mapState({
@@ -116,6 +114,13 @@ export default {
   },
   mounted(){
     this.saveUserData()
+    window.myEvent || (window.myEvent = {})
+    window.myEvent['custom-resize'] = new CustomEvent('custom-resize', { 
+        detail: { title: 'This is title!'},
+    });
+    window.myEvent['custom-chartReset'] = new CustomEvent('custom-chartReset', { 
+        detail: { title: 'This is title!'},
+    });
   },
   methods: {
     changePath(p){
@@ -170,6 +175,11 @@ export default {
     //菜单栏的折叠与展开
     toggleCollapse() {
       this.isCollapse=!this.isCollapse
+      if(window.dispatchEvent) {  
+          window.dispatchEvent(window.myEvent['custom-resize']);
+      } else {
+          window.fireEvent(window.myEvent['custom-resize']);
+      }
     },
   },
 }
