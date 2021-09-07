@@ -41,7 +41,7 @@
           <div class="map-bg1"></div>
           <div class="map-bg2"></div>
           <div class="map-bg3"></div>
-          <div class="chart"></div>
+          <div class="chart"  style="height: 810px;width:100%;"></div>
         </div>
       </div>
       <div class="column">
@@ -115,7 +115,6 @@ export default {
       window.dispatchEvent(window.myEvent['custom-chartReset'])
     },
     mapCharts(){
-      console.log(this.yearData);
       const myChart = this.$echarts.init(document.querySelector('.map .chart'))
       myChart.setOption(this.mapOption)
       window.addEventListener("resize", function () {
@@ -143,9 +142,11 @@ export default {
 }
 .echarts {
   background: url('~@/assets/images/bg.jpg') top center;
+  background-size: cover;
   background-repeat: repeat-y;
   width: 100%;
-  position: absolute;
+  // height: 100% ;
+  // position: absolute;
   header{
     color: #fff;
     height: 100px;
@@ -171,6 +172,7 @@ export default {
     width: auto;
     margin: 0 auto;
     padding: 10px 10px 0;
+    position: relative;
     display: flex;
     .column {
       flex: 3;

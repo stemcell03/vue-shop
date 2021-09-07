@@ -67,11 +67,9 @@
       <!-- 主要内容 -->
       <!-- <el-container> -->
         <el-main  class="main">
-          <div class="scroll">
-            <keep-alive>
-              <router-view></router-view>
-            </keep-alive>
-          </div>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
         </el-main>
       <!-- </el-container> -->
     </el-container>
