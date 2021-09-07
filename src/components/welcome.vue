@@ -7,7 +7,7 @@
     <section class="main">
       <div class="column">
         <panel v-for="(e1,i1) in chartOptions.left" :key="e1.title" :ids="e1.title" :option="e1">
-          <template #titleLink  v-if="e1.titleLink">
+          <template slot="titleLink"  v-if="e1.titleLink">
             <span @click="handleChangeYear('left',i1,$event)">
               <a 
                 href="javascript:;"
@@ -46,7 +46,7 @@
       </div>
       <div class="column">
         <panel v-for="(e1,i1) in chartOptions.right" :key="e1.title" :ids="e1.title" :option="e1">
-          <template #titleLink  v-if="e1.titleLink">
+          <template slot="titleLink"  v-if="e1.titleLink">
             <span @click="handleChangeYear('left',i1,$event)">
               <a 
                 href="javascript:;"
@@ -115,6 +115,7 @@ export default {
       window.dispatchEvent(window.myEvent['custom-chartReset'])
     },
     mapCharts(){
+      console.log(this.yearData);
       const myChart = this.$echarts.init(document.querySelector('.map .chart'))
       myChart.setOption(this.mapOption)
       window.addEventListener("resize", function () {

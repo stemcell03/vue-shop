@@ -53,7 +53,6 @@ axios.interceptors.request.use(config => {
 
 // 在response 拦截器去掉进度条
 axios.interceptors.response.use(config => {
-  console.log(config);
   if (config.data.meta.msg === '无效token') {
     router.push('/login')
   }
