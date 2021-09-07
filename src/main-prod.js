@@ -5,6 +5,7 @@ import router from './router'
 import "@/assets/styles/reset.scss"            // 重置HTML样式、
 import echarts from 'echarts'
 import vuescroll from 'vuescroll';
+
 // import './plugins/element.js'
 // 导入全局样式表
 import './assets/css/global.css'
@@ -25,6 +26,7 @@ import components from '@/components'
 Vue.use(VueQuillEditor, /* { default global options } */)
 
 Vue.use(components)
+Vue.prototype.$echarts = echarts
 
 Vue.use(vuescroll);
 // 在request拦截器展示进度条
